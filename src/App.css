@@ -20,19 +20,26 @@ header h1 {
   font-size: 1.5rem;
 }
 
-main ul {
+main ul,
+div ul {
   list-style: none;
   padding: 0;
   margin: 0 0 1.25rem;
 }
 
-main li {
+main li,
+div li {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
   padding: 0.6rem 0;
   border-bottom: 1px solid #eee;
+}
+
+h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1.15rem;
 }
 
 button {

@@ -1,11 +1,17 @@
 import { useCart } from "../hooks/useCart";
 
-export function Product({ name }) {
-  const { setCount } = useCart();
+export function Product({ id, name, price }) {
+  const { dispatch } = useCart();
   return (
     <li>
-      {name}{" "}
-      <button onClick={() => setCount((c) => c + 1)}>Add to cart</button>
+      {name} — {price} €{" "}
+      <button
+        onClick={() =>
+          dispatch({ type: "add", payload: { id, name, price } })
+        }
+      >
+        Add to cart
+      </button>
     </li>
   );
 }
