@@ -1,7 +1,23 @@
-// Iteration 1. Every number is written by hand.
-// They match doc/skeleton-senior-cycle-1/data-model-draft.json.
+// Iteration 2. One products array, one lines array. The screen reads them.
+// A line keeps productId only. Name and price come from the product.
 
 import "./App.css";
+
+const products = [
+  { id: "keyboard", name: "Keyboard", price: 49 },
+  { id: "mouse", name: "Mouse", price: 25 },
+];
+
+const lines = [{ productId: "mouse", qty: 1 }];
+
+function formatPrice(amount) {
+  const text = Number.isInteger(amount) ? String(amount) : amount.toFixed(2);
+  return `${text} €`;
+}
+
+function findProduct(productId) {
+  return products.find((product) => product.id === productId);
+}
 
 function CartBadge() {
   // later: units = sum of qty
@@ -17,37 +33,38 @@ function Header() {
   );
 }
 
-// Row text is written at the call site. name and price are not props yet.
-function ProductCard({ children }) {
+function ProductCard({ product }) {
   return (
     <li>
-      {children}
+      <span>
+        {product.name} — {formatPrice(product.price)}
+      </span>
       {/* later: add → Cart */}
       <button type="button">Add to cart</button>
     </li>
   );
 }
 
-function ProductList() {
+function ProductList({ products }) {
   return (
     <section>
       <h2>Products</h2>
       <ul>
-        <ProductCard>
-          <span>Keyboard — 49 €</span>
-        </ProductCard>
-        <ProductCard>
-          <span>Mouse — 25 €</span>
-        </ProductCard>
+        {products.map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
       </ul>
     </section>
   );
 }
 
-function CartLine() {
+function CartLine({ line, product }) {
+  const linePrice = product.price * line.qty;
   return (
     <li>
-      <span>Mouse × 1 — 25 €</span>
+      <span>
+        {product.name} × {line.qty} — {formatPrice(linePrice)}
+      </span>
       {/* remove */}
       <button type="button">−</button>
     </li>
@@ -78,12 +95,18 @@ function CartTotal() {
   );
 }
 
-function Cart() {
+function Cart({ lines }) {
   return (
     <section>
       <h2>Cart</h2>
       <ul>
-        <CartLine />
+        {lines.map((line) => (
+          <CartLine
+            key={line.productId}
+            line={line}
+            product={findProduct(line.productId)}
+          />
+        ))}
       </ul>
       <CartTotal />
     </section>
@@ -95,8 +118,8 @@ export default function App() {
     <>
       <Header />
       <main>
-        <ProductList />
-        <Cart />
+        <ProductList products={products} />
+        <Cart lines={lines} />
       </main>
     </>
   );
