@@ -12,7 +12,10 @@ export function deriveTotals(lines, products, shippingPrice) {
   const units = sumQty(lines);
   const subtotal = roundMoney(
     lines.reduce((sum, line) => {
-      const product = products.find((item) => item.id === line.productId);
+      const product = products.find((product) => product.id === line.productId);
+      if (!product) {
+        throw new Error(`No product for ${line.productId}`);
+      }
       return sum + product.price * line.qty;
     }, 0),
   );

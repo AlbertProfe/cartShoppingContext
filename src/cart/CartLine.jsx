@@ -1,10 +1,10 @@
-import { products } from "../products/products.js";
 import { formatPrice } from "../format.js";
+import { findProduct, products } from "../products/products.js";
 import { useCart } from "./useCart.js";
 
 export function CartLine({ line }) {
   const { removeFromCart } = useCart();
-  const product = products.find((item) => item.id === line.productId);
+  const product = findProduct(products, line.productId);
   const linePrice = product.price * line.qty;
 
   return (
