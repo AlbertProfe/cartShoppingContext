@@ -1,3 +1,25 @@
+/**
+ * App.css — the layout of the shop screen.
+ *
+ * Presence: this is the sketch, in CSS. The column is narrow and centered.
+ * The header is a row: shop name, then the badge. Each product row and
+ * each cart line is a row with the words on the left and the button on
+ * the right. The summary totals stack under the lines. When you Return,
+ * compare the running page with doc/images/expected-render-approx.png,
+ * not with these rules.
+ *
+ * Naming: .badge is the header count. .summary is the cart block.
+ * .totals is the money stack. .total is the last money row. .shipping-row
+ * is the line that holds the select. The names match the components.
+ *
+ * Flow: no data flows through CSS. If a row looks wrong, fix the markup
+ * in the component before you add a new class.
+ *
+ * 1. TODO: At Return, check the total row on a narrow window. If the
+ *          shipping select and its price collide, adjust .shipping-row
+ *          only after the numbers themselves are correct.
+ */
+
 #root {
   max-width: 40rem;
   margin: 2rem auto;
@@ -20,15 +42,20 @@ header h1 {
   font-size: 1.5rem;
 }
 
+.badge {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
 main ul,
-div ul {
+.summary ul {
   list-style: none;
   padding: 0;
   margin: 0 0 1.25rem;
 }
 
 main li,
-div li {
+.summary li {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -37,9 +64,37 @@ div li {
   border-bottom: 1px solid #eee;
 }
 
-h2 {
+.summary {
+  margin-top: 1.5rem;
+}
+
+.summary h2 {
   margin: 0 0 0.5rem;
   font-size: 1.15rem;
+}
+
+.totals {
+  display: grid;
+  gap: 0.4rem;
+  margin: 0.75rem 0 1rem;
+}
+
+.totals > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.shipping-row select {
+  font: inherit;
+  margin-left: auto;
+}
+
+.total {
+  font-weight: 700;
+  border-top: 1px solid #ddd;
+  padding-top: 0.55rem;
 }
 
 button {

@@ -1,3 +1,17 @@
+/**
+ * index.css — the page behind the shop.
+ *
+ * Presence: these rules sit under every component. They set the page
+ * color and the body margin. They do not describe the cart.
+ *
+ * Naming: :root is the page, not #root (that box is the shop, in App.css).
+ *
+ * Flow: none.
+ *
+ * 1. TODO: Leave cart layout in App.css. A rule that only the badge needs
+ *          does not belong on :root.
+ */
+
 :root {
   color: #1a1a1a;
   background: #f6f7f9;
