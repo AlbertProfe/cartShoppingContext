@@ -1,6 +1,7 @@
-// Iteration 2. One products array, one lines array. The screen reads them.
-// A line keeps productId only. Name and price come from the product.
+// Iteration 3. The lines live in App, the closest parent of the badge and the cart.
+// Totals are computed here on each render. They are not stored.
 
+import { useState } from "react";
 import "./App.css";
 
 const products = [
@@ -8,118 +9,172 @@ const products = [
   { id: "mouse", name: "Mouse", price: 25 },
 ];
 
-const lines = [{ productId: "mouse", qty: 1 }];
+const TAX_RATE = 0.21;
+const SHIPPING = 4.95;
 
-function formatPrice(amount) {
-  const text = Number.isInteger(amount) ? String(amount) : amount.toFixed(2);
-  return `${text} €`;
+function roundMoney(amount) {
+  return Math.round((amount + Number.EPSILON) * 100) / 100;
 }
 
 function findProduct(productId) {
   return products.find((product) => product.id === productId);
 }
 
-function CartBadge() {
-  // later: units = sum of qty
-  return <span className="badge">🛒 1</span>;
+function deriveTotals(lines) {
+  const units = lines.reduce((sum, line) => sum + line.qty, 0);
+  const subtotal = roundMoney(
+    lines.reduce((sum, line) => {
+      const product = findProduct(line.productId);
+      return sum + product.price * line.qty;
+    }, 0),
+  );
+  const tax = roundMoney(subtotal * TAX_RATE);
+  const shipping = lines.length === 0 ? 0 : SHIPPING;
+  const total = roundMoney(subtotal + tax + shipping);
+  return { units, subtotal, tax, shipping, total };
 }
 
-function Header() {
+function formatPrice(amount) {
+  const text = Number.isInteger(amount) ? String(amount) : amount.toFixed(2);
+  return `${text} €`;
+}
+
+function formatMoney(amount) {
+  return `${amount.toFixed(2)} €`;
+}
+
+function CartBadge({ units }) {
+  return <span className="badge">🛒 {units}</span>;
+}
+
+function Header({ units }) {
   return (
     <header>
       <h1>My Shop</h1>
-      <CartBadge />
+      <CartBadge units={units} />
     </header>
   );
 }
 
-function ProductCard({ product }) {
+function ProductCard({ product, onAdd }) {
   return (
     <li>
       <span>
         {product.name} — {formatPrice(product.price)}
       </span>
-      {/* later: add → Cart */}
-      <button type="button">Add to cart</button>
+      <button type="button" onClick={() => onAdd(product.id)}>
+        Add to cart
+      </button>
     </li>
   );
 }
 
-function ProductList({ products }) {
+function ProductList({ products, onAdd }) {
   return (
     <section>
       <h2>Products</h2>
       <ul>
         {products.map((product) => (
-          <ProductCard key={product.id} product={product} />
+          <ProductCard key={product.id} product={product} onAdd={onAdd} />
         ))}
       </ul>
     </section>
   );
 }
 
-function CartLine({ line, product }) {
+function CartLine({ line, product, onRemove }) {
   const linePrice = product.price * line.qty;
   return (
     <li>
       <span>
         {product.name} × {line.qty} — {formatPrice(linePrice)}
       </span>
-      {/* remove */}
-      <button type="button">−</button>
+      <button type="button" onClick={() => onRemove(line.productId)}>
+        −
+      </button>
     </li>
   );
 }
 
-function CartTotal() {
+function CartTotal({ totals }) {
   return (
     <div className="totals">
-      {/* total = sum(lines) */}
       <div>
         <span>Subtotal</span>
-        <span>25.00 €</span>
+        <span>{formatMoney(totals.subtotal)}</span>
       </div>
       <div>
         <span>Tax</span>
-        <span>5.25 €</span>
+        <span>{formatMoney(totals.tax)}</span>
       </div>
       <div>
         <span>Shipping</span>
-        <span>4.95 €</span>
+        <span>{formatMoney(totals.shipping)}</span>
       </div>
       <div className="total">
         <span>Total</span>
-        <span>35.20 €</span>
+        <span>{formatMoney(totals.total)}</span>
       </div>
     </div>
   );
 }
 
-function Cart({ lines }) {
+function Cart({ lines, onRemove, totals }) {
   return (
     <section>
       <h2>Cart</h2>
-      <ul>
-        {lines.map((line) => (
-          <CartLine
-            key={line.productId}
-            line={line}
-            product={findProduct(line.productId)}
-          />
-        ))}
-      </ul>
-      <CartTotal />
+      {lines.length === 0 ? (
+        <p>The cart is empty.</p>
+      ) : (
+        <ul>
+          {lines.map((line) => (
+            <CartLine
+              key={line.productId}
+              line={line}
+              product={findProduct(line.productId)}
+              onRemove={onRemove}
+            />
+          ))}
+        </ul>
+      )}
+      <CartTotal totals={totals} />
     </section>
   );
 }
 
 export default function App() {
+  const [lines, setLines] = useState([{ productId: "mouse", qty: 1 }]);
+
+  function addToCart(productId) {
+    setLines((current) => {
+      const existing = current.find((line) => line.productId === productId);
+      if (existing) {
+        return current.map((line) =>
+          line.productId === productId ? { ...line, qty: line.qty + 1 } : line,
+        );
+      }
+      return [...current, { productId, qty: 1 }];
+    });
+  }
+
+  function removeFromCart(productId) {
+    setLines((current) =>
+      current
+        .map((line) =>
+          line.productId === productId ? { ...line, qty: line.qty - 1 } : line,
+        )
+        .filter((line) => line.qty > 0),
+    );
+  }
+
+  const totals = deriveTotals(lines);
+
   return (
     <>
-      <Header />
+      <Header units={totals.units} />
       <main>
-        <ProductList products={products} />
-        <Cart lines={lines} />
+        <ProductList products={products} onAdd={addToCart} />
+        <Cart lines={lines} onRemove={removeFromCart} totals={totals} />
       </main>
     </>
   );

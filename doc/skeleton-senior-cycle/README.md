@@ -8,3 +8,4 @@ The first picture of the data is [`data-model-draft.json`](data-model-draft.json
 | --- | --- | --- |
 | 1 | [Presence, Representation, Return](iteration-1-presence-representation-return.md) | [render](render-iteration-1.png) |
 | 2 | [Data flows down](iteration-2-presence-representation-return.md) | [render](render-iteration-2.png) |
+| 3 | [The cart comes alive](iteration-3-presence-representation-return.md) | [render](render-iteration-3.png) |
