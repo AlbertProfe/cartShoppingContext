@@ -1,10 +1,22 @@
-# Shopping cart — teaching skeleton
+# Iteration 1 (initial) — Presence, Representation, Return
 
-This branch is one round of the senior cycle, written down before the cart rules are filled in. The screen renders. The transitions and the money are still `TODO`.
+Iteration 1 is the initial round. One round = three phases: Presence, Representation, Return.
 
-A senior does not start by typing. See the whole feature, make one piece clear, build that piece, then look at the whole again. Names run through all three moves. A confusing name usually points to a confusing design, so the names below are part of the work, not decoration.
+This page holds that round for the shopping cart, written down before the cart rules are filled in. The screen renders. The transitions and the money are still `TODO`.
 
-The lab brief with the expected screen is [exercise-cart-items-array.md](exercise-cart-items-array.md). The first sketch is [images/expected-render-approx.png](images/expected-render-approx.png).
+A senior does not start by typing. See the whole feature, make one piece clear, build that piece, then look at the whole again. Names run through all three phases. A confusing name usually points to a confusing design, so the names below are part of the work, not decoration.
+
+The lab brief is [exercise-cart-items-array.md](../exercise-cart-items-array.md). It stays in `doc/`, next to this folder, because it is the lab for the finished screen. The goal sketch is [expected-render-approx.png](../images/expected-render-approx.png).
+
+## This iteration, as it runs
+
+Desktop. The badge and the money rows are dashes. The cart is empty. Shipping already shows the price of the selected method.
+
+![Iteration 1 desktop. My Shop, Keyboard and Mouse, an empty cart, dashed totals, shipping at 4.95 €.](render-iteration-1.png)
+
+Narrow window, 390px wide. Same column. The shipping select stays on one row.
+
+![Iteration 1 at 390px. The same shop, with the shipping select still beside its price.](render-iteration-1-mobile.png)
 
 ## Presence
 
@@ -40,7 +52,11 @@ When it works, all of this is true:
 
 ### Mockup
 
-The sketch of the lines and the plain total is `doc/images/expected-render-approx.png`. Tax and the shipping select are the rest of the same screen, under those lines. They are in the lab brief. This skeleton already draws that chrome: the dashes are the numbers you have not computed yet. The shipping row already reads the fixture, so the select is a real control.
+Two pictures, on purpose.
+
+The goal sketch — lines with quantities and a plain total — is [expected-render-approx.png](../images/expected-render-approx.png) (`doc/images/expected-render-approx.png`). Tax and the shipping select are the rest of the same screen, under those lines. They are in the lab brief.
+
+This iteration already draws that chrome. The dashes are the numbers you have not computed yet. The shipping row already reads the fixture, so the select is a real control. That running page is the picture at the top of this file, `render-iteration-1.png`.
 
 ### Unknowns
 
@@ -179,7 +195,7 @@ Broad attention again. Put the piece back into the whole.
 ### Checklist
 
 - [ ] `npm install` and `npm run dev`. Use the page, not only the code.
-- [ ] Compare with `doc/images/expected-render-approx.png`, then with the tax and shipping lines in the lab brief. Compare with the sketch, not with your diff.
+- [ ] Compare with the goal sketch `doc/images/expected-render-approx.png`, then with the tax and shipping lines in the lab brief. The picture at the top of this file is iteration 1 before those TODOs. Compare with the sketch, not with your diff.
 - [ ] Add Keyboard twice. One line, qty 2, badge 2.
 - [ ] Add Mouse. Badge 3. Two lines.
 - [ ] Minus on Keyboard. Qty 1, then the line disappears. Badge agrees.
@@ -204,7 +220,10 @@ Behaviour first. Then the whole, against the real world, not only the sketch.
 ## File map
 
 ```
-doc/SKELETON.md
+doc/skeleton-senior-cycle-1/iteration-1-presence-representation-return.md
+doc/skeleton-senior-cycle-1/render-iteration-1.png
+doc/skeleton-senior-cycle-1/render-iteration-1-mobile.png
+doc/exercise-cart-items-array.md
 src/main.jsx
 src/App.jsx
 src/App.css

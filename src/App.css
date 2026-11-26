@@ -6,7 +6,8 @@
  * each cart line is a row with the words on the left and the button on
  * the right. The summary totals stack under the lines. When you Return,
  * compare the running page with doc/images/expected-render-approx.png,
- * not with these rules.
+ * not with these rules. The iteration 1 picture of this skeleton is
+ * doc/skeleton-senior-cycle-1/render-iteration-1.png.
  *
  * Naming: .badge is the header count. .summary is the cart block.
  * .totals is the money stack. .total is the last money row. .shipping-row

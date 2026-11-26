@@ -1,7 +1,7 @@
 # Exercise: cart as an array — items, taxes and shipping
 
 **Lab:** [RE08-1 — Cart Shopping Context](https://albertprofe.dev/reactjs/rjslab8-1.html)
-**Skeleton:** [SKELETON.md](SKELETON.md) — Presence, Representation, and Return for this feature. The files on this branch are the skeleton. Fill in the numbered TODOs there. You do not need to check out an older commit.
+**Skeleton:** [iteration-1-presence-representation-return.md](skeleton-senior-cycle-1/iteration-1-presence-representation-return.md) — iteration 1 (initial). One round = three phases: Presence, Representation, Return. The files on this branch are the skeleton. Fill in the numbered TODOs there. You do not need to check out an older commit.
 **Playground:** [cart-context-visuals](https://albertprofe.dev/images/reactjs/docs/cart-context-visuals.html)
 
 The notes below still describe the lab: what v0.1 stored, and what the finished screen must do. On this branch the screen chrome and the action names are already in the files. The reducer, the badge count, and the money are the slices you type.

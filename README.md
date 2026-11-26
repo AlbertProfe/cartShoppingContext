@@ -4,13 +4,17 @@ Teaching skeleton for the shopping-cart labs [RE08-1](https://albertprofe.dev/re
 
 The screen is in place: a header with a badge, a shelf of products, and a cart summary with tax and shipping. The cart rules are not. You fill those in.
 
-Start with [doc/SKELETON.md](doc/SKELETON.md). That page is one round of the senior cycle for this feature:
+Start with [doc/skeleton-senior-cycle-1/iteration-1-presence-representation-return.md](doc/skeleton-senior-cycle-1/iteration-1-presence-representation-return.md). That page is iteration 1 (initial). One round = three phases: Presence, Representation, Return.
 
 1. **Presence** — the feature in your own words, the goal, the user flow, the unknowns. No typing.
 2. **Representation** — the names, the component tree, the state shape, the actions, and the flow. Then the numbered `TODO` steps, one file at a time.
 3. **Return** — run the real page and compare it with the first sketch.
 
-The lab brief and the sketch live in [doc/exercise-cart-items-array.md](doc/exercise-cart-items-array.md).
+The lab brief stays in [doc/exercise-cart-items-array.md](doc/exercise-cart-items-array.md). It is the lab for the finished screen. The goal sketch is [doc/images/expected-render-approx.png](doc/images/expected-render-approx.png).
+
+## Iteration 1, as it runs
+
+![Iteration 1 desktop. Empty cart, dashed badge and totals, shipping at 4.95 €.](doc/skeleton-senior-cycle-1/render-iteration-1.png)
 
 ## Run it
 
