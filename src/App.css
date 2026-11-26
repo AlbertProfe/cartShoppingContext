@@ -20,15 +20,22 @@ header h1 {
   font-size: 1.5rem;
 }
 
-main ul,
-div ul {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 1.25rem;
+.badge {
+  white-space: nowrap;
 }
 
-main li,
-div li {
+h2 {
+  margin: 1.25rem 0 0.5rem;
+  font-size: 1.15rem;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -37,13 +44,36 @@ div li {
   border-bottom: 1px solid #eee;
 }
 
-h2 {
-  margin: 0 0 0.5rem;
-  font-size: 1.15rem;
+.totals {
+  margin-top: 0.75rem;
+}
+
+.totals div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.2rem 0;
+}
+
+.total {
+  font-weight: 700;
+  border-top: 1px solid #ddd;
+  margin-top: 0.35rem;
+  padding-top: 0.5rem;
+}
+
+.shipping-choice {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}
+
+select {
+  font: inherit;
 }
 
 button {
   font: inherit;
-  cursor: pointer;
   padding: 0.35rem 0.75rem;
 }

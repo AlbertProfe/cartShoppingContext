@@ -1,15 +1,17 @@
-import { CartProvider } from "./context/CartContext";
-import { Header } from "./Header/Header";
-import { Main } from "./Main/Main";
+import { CartProvider } from "./cart/CartContext.jsx";
+import { Cart } from "./cart/Cart.jsx";
+import { Header } from "./Header.jsx";
+import { ProductList } from "./products/ProductList.jsx";
 import "./App.css";
 
-function App() {
+export default function App() {
   return (
     <CartProvider>
       <Header />
-      <Main />
+      <main>
+        <ProductList />
+        <Cart />
+      </main>
     </CartProvider>
   );
 }
-
-export default App;

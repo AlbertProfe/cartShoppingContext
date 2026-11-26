@@ -1,0 +1,18 @@
+{
+  "products": [
+    { "id": "keyboard", "name": "Keyboard", "price": 49 },
+    { "id": "mouse", "name": "Mouse", "price": 25 }
+  ],
+  "cart": {
+    "lines": [
+      { "productId": "mouse", "name": "Mouse", "price": 25, "qty": 1 }
+    ],
+    "totals": {
+      "units": 1,
+      "subtotal": 25,
+      "tax": 5.25,
+      "shipping": 4.95,
+      "total": 35.2
+    }
+  }
+}

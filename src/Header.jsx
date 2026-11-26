@@ -1,4 +1,4 @@
-import { CartBadge } from "../CartBadge/CartBadge";
+import { CartBadge } from "./cart/CartBadge.jsx";
 
 export function Header() {
   return (
